@@ -110,10 +110,10 @@
             <li><a href="#what-is-mining">What is Mining?</a></li>
             <li><a href="#how-do-i-start-mining">How do I start mining?</a></li>
             <li><a href="#how-do-i-see-my-hashrate">How do I see my hashrate?</a></li>
+            <li><a href="#how-will-i-know-if-i-find-a-block">How will I know if I find a block?</a></li>
             <li><a href="#understanding-threads">Understanding threads</a></li>
             <li><a href="#can-i-really-mine-on-any-cpu">Can I really mine on any CPU?</a></li>
             <li><a href="#probability-of-finding-a-block">Probability of finding a block</a></li>
-            <li><a href="#how-will-i-know-when-i-found-a-block">How will I know when I found a block?</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -126,7 +126,10 @@
 <h2 id="how-do-i-start-mining">How do I start mining?</h2>
 <p>Refer to the <a href="../cli">CLI Guide</a> or <a href="../gui">GUI Guide</a> according to which you are using.</p>
 <h2 id="how-do-i-see-my-hashrate">How do I see my hashrate?</h2>
-<p>In the GUI, your hashrate is shown visually. In the CLI you can use the <code>status</code> command. You can also use the <code>show_hr</code> command to toggle a constant output.</p>
+<p>In the GUI, your hashrate is shown visually. In the CLI you can use the <code>status</code> command. You can also use the <code>show_hr</code> and <code>hide_hr</code> commands to toggle between a constant output of your current hashrate.</p>
+<h2 id="how-will-i-know-if-i-find-a-block">How will I know if I find a block?</h2>
+<p>A message will be displayed in the daemon along the lines of <code>Found block at height: xxxxxx</code>.</p>
+<p>If you have your wallet open, you will also see the block reward as an incoming transaction.</p>
 <h2 id="understanding-threads">Understanding threads</h2>
 <p>A thread is simply a virtual representation of a CPU core. Modern CPU's have 2-8+ cores, with some very high end models packing 32 or more cores. Most modern CPU's also feature Simultaneous Multithreading (SMT), also known as HyperThreading, which allows for multiple threads per core.</p>
 <p>Basically, if you have a quad core CPU, it will have either 4 or 8 threads depending on whether it supports SMT. You can easily check how many threads you have by looking up your CPU model.</p>
@@ -150,10 +153,7 @@
 <h3 id="i-was-finding-blocks-before-but-not-anymore-is-something-wrong">I was finding blocks before but not anymore, is something wrong?</h3>
 <p>This is a very common question and almost always just bad luck. Unless there is an error message or your hashrate has dropped (or network difficulty has risen significantly) you just need to wait. Things will average out and you will start finding blocks again.</p>
 <h3 id="does-my-chance-of-finding-a-block-increase-over-time">Does my chance of finding a block increase over time?</h3>
-<p>All else being equal (ie if the network difficulty and your hashrate have not changed), no. You have the same likelihood each block, of finding that block. There is no advantage from having mined longer than someone else.</p>
-<h2 id="how-will-i-know-when-i-found-a-block">How will I know when I found a block?</h2>
-<p>A message will be displayed in the daemon along the lines of <code>Found block at height xxxxxx</code>.</p>
-<p>If you have your wallet open, you will also see the block reward as an incoming transaction.</p></div>
+<p>All else being equal (ie if the network difficulty and your hashrate have not changed), no. You have the same likelihood each block, of finding that block. There is no advantage from having mined longer than someone else.</p></div>
         </div>
 
         <footer class="col-md-12">
