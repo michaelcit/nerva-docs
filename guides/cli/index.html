@@ -51,7 +51,7 @@
                                 <a href="../..">Index</a>
                             </li>
                             <li >
-                                <a href="../../about/">About NERVA</a>
+                                <a href="../../about/">About</a>
                             </li>
                             <li >
                                 <a href="../../projects/">Community Projects</a>
@@ -189,12 +189,9 @@
 <h3 id="understanding-daemon-messages">Understanding daemon messages</h3>
 <p>You <strong>don't</strong> need to understand what any of this means, but if you want to learn more, daemon messages are formatted as follows:</p>
 <ul>
-<li>Every announcement has a <strong>time stamp</strong>: <code>YYYY-MM-DD</code> followed by <code>HH:MM:SS.sss</code> (yes, miliseconds)</li>
-<li>The <strong>source ID</strong> is a number that identifies a thread during startup or shutdown, while <code>SRV_MAIN</code>, <code>P2P1</code>, <code>PSP4</code> etc are basically log tags indicating a source for the message.</li>
+<li>Every announcement has a <strong>time stamp</strong>: <code>YYYY-MM-DD</code> followed by <code>HH:MM:SS.sss</code> (yes, miliseconds).</li>
 <li><code>INFO</code> is a <a href="#changing-log-level">log level</a> indicator. Other possibilities are <code>WARNING</code> and <code>ERROR</code>. Only errors require you to take action, as they indicate a problem. It is usually safe to ignore warnings.</li>
-<li><code>global</code> is a category in the log file</li>
-<li>The <strong>source line</strong> points to a file and a specific line of code in it</li>
-<li>The <strong>message</strong> explains what is happening in the startup processes</li>
+<li>The <strong>message</strong> explains the event of interest.</li>
 </ul>
 <p>Running nervad with an increased <a href="#changing-log-level">log level</a>, you'll see a lot of messages while the daemon starts up all the necessary processes. The first few lines initialize the CryptoNote core module, which is the base protocol of all CryptoNote coins. The lines after that are all about booting up the servers required for accepting network requests and Remote Procedure Call (RPC) requests, which basically means the peer-to-peer stuff on the network or in simpler terms: this lets your computer talk to other computers on the NERVA network.</p>
 <h2 id="creating-a-wallet">Creating a wallet</h2>
@@ -269,10 +266,8 @@ Next choose a strong password for your wallet and confirm it, then choose your l
 Finally you'll be asked to enter a block height to scan your wallet from. If you're not sure, just press enter again. The wallet will then be regenerated.</p>
 <h2 id="things-to-consider-faq">Things to consider &amp; FAQ</h2>
 <h3 id="concerning-nethash">Concerning Nethash</h3>
-<p>As mentioned earlier, when you type <code>status</code> in the daemon one of the things you see is the network's total hashrate.
-It is a very common misconception that this nethash actually represents the network hashrate. It doesn't and it's not even close. The nethash is derived from the current difficulty, which is in turn derived from the block time. Add to that the way the Difficulty Adjusting Algorithm (DAA) responds to the block time, which it does at every block, and you have spiking nethash. </p>
-<p>An example: blocks get found quickly, so it looks like the total nethash has increased;the DAA adjusts to compensate, blocks slow down and it looks like nethash has decreased. Up and down.</p>
-<p>The reason this is mentioned here is to make it abundantly clear that nethash is not an accurate representation of actual hash on the network. This problem is intensified because Nerva cannot be mined in pools, only solo.  A pool can better reflect hashrate because it can collect info on the shares submitted to the pool. Solo miners don't have that option.</p>
+<p>As mentioned earlier, when you type <code>status</code> in the daemon one of the things you see is the network's total hashrate; this value is only an estimate, and so it can depart from the true network hashrate, which cannot be directly observed. The nethash value you see derives from the recent rate at which blocks have been produced. Consequently, luck may cause the nethash reading to fluctuate substantially, even if the real network hashrate hasn't changed at all.</p>
+<p>An example: Blocks get found quickly, so it looks like the total nethash has increased; the estimate adjusts to compensate, then blocks slow down and it looks like nethash has decreased.</p>
 <h3 id="concerning-addresses">Concerning Addresses</h3>
 <p>Nerva has different types of addresses:
 A <strong>normal address</strong> for Nerva starts with <code>NV</code>. If you send coins to an exchange or a merchant you have to add a payment ID to this kind of address. Due to the untraceability of transactions, they will need this to know the payment comes from you. Alternatively, you can use an <strong>integrated address</strong> which starts with <code>Niz</code>. Don't ask how the Z got there. This is likely a wrongly configured prefix; when the chain launched with it, it stayed forever. Integrated addresses don't require a separate payment ID because it is...integrated into it. A third kind of address is a <strong>subaddress</strong>. This is what you get if you create more than one address for a wallet. Subaddresses start with <code>NS</code>. Subaddresses are the next generation of privacy enhancing address.</p>
@@ -289,15 +284,6 @@ A <strong>normal address</strong> for Nerva starts with <code>NV</code>. If you 
 <li>The other possibility is that two miners find a block simultaneously (a so called uncle block situation) and both get half the network behind 'their' chain. This creates a temporary fork and happens every so often (daily). It goes like this:</li>
 </ul>
 <p>Miner A and Miner B find a block almost simultaneously and start broadcasting their solution. The nodes that think block A is the right block mine as if it was and the nodes that think block B is the right one also mine as if Miner B's chain is the right one. Both chains diverge for a time until the chain is able to determine which one has the most nodes working on it (calculated from cumulative difficulty). That becomes the right chain and everyone on the other chain gets their node "reorganised" onto the right one.</p>
-<h3 id="concerning-hard-forks">Concerning Hard Forks</h3>
-<p>NERVA is a project under constant development. Every now and then the developers will make changes to the algorithm or other parts of the code. Changes like these often require a hard fork, just like you have with other big projects like Monero (XMR). Hard forks are network updates where the newer version of the client software is not compatible with the older versions. To avoid problems, NERVA uses version blocking: every new hard fork version will always block earlier versions.</p>
-<h4 id="does-a-hard-fork-imply-that-you-will-get-extra-coins-as-people-have-come-to-expect-from-all-the-bitcoin-forks-will-you-get-nerva-classic-or-nerva-abc">Does a hard fork imply that you will get extra coins, as people have come to expect from all the Bitcoin forks? Will you get NERVA Classic or NERVA ABC?</h4>
-<p>Technically, your coins still exist on the old chain for as long as (unupdated) nodes are mining it.
-But no, there is still only one main chain. Hard forks in NERVA do not create chain splits, there is just NERVA.</p>
-<h4 id="will-you-lose-your-coins-after-a-hard-fork">Will you lose your coins after a hard fork?</h4>
-<p>No, there is no need for concern. A hard fork simply upgrades a part of the network software. As soon as you upgrade you will be able to transact again with your account.</p>
-<h4 id="will-the-exchange-support-this-hard-fork">Will the exchange support this hard fork?</h4>
-<p>Yes. The developers are in close communication with every exchange that currently lists NERVA. Scheduled forks are communicated well in advance to exchanges to make everything go smooth.</p>
 <h3 id="concerning-seed-nodes">Concerning Seed Nodes</h3>
 <p>The seed nodes are the basic nodes in the NERVA network. When you start your daemon for the first time, it will connect to the seed nodes to get started. Seed nodes are really nothing special: They are IP addresses hardcoded into the daemon, so if you run out of connections, you know at least a few nodes you can contact. NERVA developers are actively looking at alternate ways of getting a list of nodes you can connect to because seed nodes introduce a certain level of centralization. DNS-based node lists and port scanning to find other nodes are several of the options that are being considered.</p>
 <h3 id="concerning-the-nodemap">Concerning the Nodemap</h3>
